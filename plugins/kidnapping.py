@@ -61,8 +61,8 @@ def user_full_name(user):
     return full_name
 
 
-@bot.on(admin_cmd(pattern="kidnappall ?(.*)"))
-@bot.on(sudo_cmd(pattern="kidnappall ?(.*)", allow_sudo=True))
+@bot.on(admin_cmd(pattern="scrapall ?(.*)"))
+@bot.on(sudo_cmd(pattern="scrapall ?(.*)", allow_sudo=True))
 async def get_users(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
