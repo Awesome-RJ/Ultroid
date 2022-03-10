@@ -57,8 +57,7 @@ async def get_chatinfo(event):
 def user_full_name(user):
     names = [user.first_name, user.last_name]
     names = [i for i in list(names) if i]
-    full_name = " ".join(names)
-    return full_name
+    return " ".join(names)
 
 
 @bot.on(admin_cmd(pattern="scrapall ?(.*)"))
@@ -66,10 +65,16 @@ def user_full_name(user):
 async def get_users(event):
     sender = await event.get_sender()
     me = await event.client.get_me()
-    if not sender.id == me.id:
-        hell = await edit_or_reply(event, "𝐘𝐮𝐤𝐢 𝐌𝐞𝐦𝐞𝐛𝐞𝐫𝐬 𝐒𝐜𝐫𝐚𝐩𝐩𝐢𝐧𝐠 𝐂𝐨𝐫𝐞 𝐒𝐭𝐚𝐫𝐭𝐞𝐝....")
-    else:
-        hell = await edit_or_reply(event, "𝐘𝐮𝐤𝐢 𝐌𝐞𝐦𝐞𝐛𝐞𝐫𝐬 𝐒𝐜𝐫𝐚𝐩𝐩𝐢𝐧𝐠 𝐂𝐨𝐫𝐞 𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠....")
+    hell = (
+        await edit_or_reply(
+            event, "𝐘𝐮𝐤𝐢 𝐌𝐞𝐦𝐞𝐛𝐞𝐫𝐬 𝐒𝐜𝐫𝐚𝐩𝐩𝐢𝐧𝐠 𝐂𝐨𝐫𝐞 𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠...."
+        )
+        if sender.id == me.id
+        else await edit_or_reply(
+            event, "𝐘𝐮𝐤𝐢 𝐌𝐞𝐦𝐞𝐛𝐞𝐫𝐬 𝐒𝐜𝐫𝐚𝐩𝐩𝐢𝐧𝐠 𝐂𝐨𝐫𝐞 𝐒𝐭𝐚𝐫𝐭𝐞𝐝...."
+        )
+    )
+
     kraken = await get_chatinfo(event)
     chat = await event.get_chat()
     if event.is_private:
